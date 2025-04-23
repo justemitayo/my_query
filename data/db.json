@@ -1,0 +1,6 @@
+{
+  "users": [
+    { "id": 1, "name": "John Doe", "details": "mambo mambo mambo" },
+    { "id": 2, "name": "Jane Smith", "details": "jumbo jumbo jumbo" }
+  ]
+}
