@@ -10,7 +10,7 @@ interface mean {
 
 const UserDetail:React.FC<mean> = ({userId}) => { 
 
-  const {data: user, isLoading, isError} = useQuery<Use>({queryKey: ['user', userId], queryFn: () => api.getUser(userId), enabled: Boolean(userId) })
+  const {data: user, isLoading, isError, isFetching} = useQuery<Use>({queryKey: ['user', userId], queryFn: () => api.getUser(userId), enabled: Boolean(userId) })
   // we used ['user', userId] as key because we are grabbing specific data
 
   if(!userId) {
@@ -29,6 +29,7 @@ const UserDetail:React.FC<mean> = ({userId}) => {
 
   return (
     <div>
+      {isFetching && 'Background refetching...'}
       <h2>{user.name}</h2>
       <p>{user.details}</p>
     </div>
