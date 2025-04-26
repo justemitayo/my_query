@@ -3069,6 +3069,11 @@ builtin-modules@^3.1.0:
   resolved "https://registry.yarnpkg.com/builtin-modules/-/builtin-modules-3.3.0.tgz#cae62812b89801e9656336e46223e030386be7b6"
   integrity sha512-zhaCDicdLuWN5UbN5IMnFqNMhNfo919sH85y2/ea+5Yg9TsTkeZxpL+JLbp6cgYFS4sRLp3YV4S6yDuqVWHYOw==
 
+bytelock@^1.0.4:
+  version "1.0.4"
+  resolved "https://registry.yarnpkg.com/bytelock/-/bytelock-1.0.4.tgz#4ca6e58866efc3477497de4e7477f32afce20bbe"
+  integrity sha512-Ctu7lHYPYVr+vfquBYqZBE0KCPE4cscD7nJt4kMH/30uYfm/AeuCzlPFms6GHfRceezGaqdKIVF4W4e2W0JohQ==
+
 bytes@3.1.2:
   version "3.1.2"
   resolved "https://registry.yarnpkg.com/bytes/-/bytes-3.1.2.tgz#8b0beeb98605adf1b128fa4386403c009e0221a5"

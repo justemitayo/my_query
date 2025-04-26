@@ -1,5 +1,6 @@
 import React, { useState,  ChangeEvent, FormEvent } from 'react'
 import { Use } from './UserApi';
+import ByteLockInstance from 'bytelock';
 
 interface formProps {
   users: Use;
@@ -11,8 +12,12 @@ const UserForm: React.FC<formProps> = ({users, setIsEditing}) => {
   const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
     const {name, value} = event.target;
     setFields({...fields, [name]: value})
+    // This is for updating multiple input fields in a form — like name, email, password, etc.
+
+    const key = ByteLockInstance.generateCipherKey('66abe1cc11f58bf19a8dcef7', '66b1097c4ede2430559fa193');
+    const message = ByteLockInstance.cipherMessage('Hello!', key);
+    console.log("CipherKey", key, message);
   }
-  // This is for updating multiple input fields in a form — like name, email, password, etc.
 
   const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
