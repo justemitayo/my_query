@@ -1,6 +1,14 @@
 {
   "users": [
-    { "id": 1, "name": "John Doe", "details": "mambo mambo mambo" },
-    { "id": 2, "name": "Jane Smith", "details": "jumbo jumbo jumbo" }
+    {
+      "id": "1",
+      "name": "John Doe",
+      "details": "mambo mambo mambo"
+    },
+    {
+      "name": "Jane Smith",
+      "details": "i am a boy",
+      "id": "2"
+    }
   ]
 }

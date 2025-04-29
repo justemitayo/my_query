@@ -2,6 +2,8 @@ import User from './User';
 // import './App.css';
 import { useState } from 'react';
 import UserDetail from './UserDetail';
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 
 
@@ -16,6 +18,7 @@ function App() {
       <div style={{padding:'20px', width:'70%' }}>
         <UserDetail userId={userId}/>
       </div>
+      <ToastContainer position="top-right" autoClose={3000} />
     </div>
   );
 }
