@@ -1,6 +1,8 @@
 import React, { useState,  ChangeEvent, FormEvent } from 'react'
 import { Use, useUpdateUser } from './UserApi';
 import ByteLockInstance from 'bytelock';
+import { toast } from 'react-toastify';
+import { useQueryClient } from '@tanstack/react-query';
  
 interface formProps {
   users: Use;
@@ -8,7 +10,7 @@ interface formProps {
 }
 
 const UserForm: React.FC<formProps> = ({users, setIsEditing}) => {
-
+  const queryClient = useQueryClient()
   const updateUser = useUpdateUser()
   const [fields, setFields] = useState<Use>({...users })
   const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
@@ -25,12 +27,22 @@ const UserForm: React.FC<formProps> = ({users, setIsEditing}) => {
     event.preventDefault();
 
     if (!fields.id) {
-      console.error('User ID is required to update');
+      toast.error('Missing user ID. Cannot update.');
       return;
     } 
+    toast.info('updating user...')
+
     updateUser.mutate(fields, {
       onSuccess: () =>{
-        setIsEditing(false)
+        toast.success('User updated successfully!!!');
+        queryClient.invalidateQueries({queryKey:['user', users.id]});
+        // triggers the old data to be updated
+        setTimeout(() => {
+          setIsEditing(false);
+        }, 1000);
+      },
+      onError: (error: any) => {
+        toast.error(`Update failed: ${error.message || 'Unknown error'}`)
       }
     })
   }
@@ -64,7 +76,7 @@ const UserForm: React.FC<formProps> = ({users, setIsEditing}) => {
             style={{width: '100%', height: 100}}
           />
         </label>
-          <button type='submit'>SAVE</button>
+          <button type='submit' disabled={updateUser.isPending}>{updateUser.isPending ? 'Saving...' : 'SAVE'}</button>
 
       </form>
     </div>
