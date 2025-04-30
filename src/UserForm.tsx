@@ -36,13 +36,21 @@ const UserForm: React.FC<formProps> = ({users, setIsEditing}) => {
       onSuccess: (data) =>{
         toast.success('User updated successfully!!!');
 
-        queryClient.setQueryData(['user', users.id], data)
+        const cachedUsers = queryClient.getQueryData<Use[]>(['user'])
+
+        if (cachedUsers) {
+          // Create a new updated list
+          const updatedUsers = cachedUsers.map(user =>
+            user.id === data.id ? { ...user, ...data } : user
+          )
+
+        queryClient.setQueryData(['user', users.id], updatedUsers)
         queryClient.invalidateQueries({queryKey:['user', users.id ]});
         // triggers the old data to be updated
         setTimeout(() => {
           setIsEditing(false);
         }, 1000);
-      },
+      }},
       onError: (error: any) => {
         toast.error(`Update failed: ${error.message || 'Unknown error'}`)
       }
