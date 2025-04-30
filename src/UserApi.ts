@@ -26,7 +26,7 @@ export const getUser = (id: number | string) => api.get(`/users/${id}`).then(res
 export const useUpdateUser = () => {
   return useMutation({
     mutationFn: ({id, ...updatedUser}:Partial<Use> & { id: number | string }) =>{
-      return api.put(`/users/${id}`, updatedUser)
+      return api.put(`/users/${id}`, updatedUser).then(res=>res.data);
     }
   })
 } 

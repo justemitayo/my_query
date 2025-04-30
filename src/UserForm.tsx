@@ -33,9 +33,11 @@ const UserForm: React.FC<formProps> = ({users, setIsEditing}) => {
     toast.info('updating user...')
 
     updateUser.mutate(fields, {
-      onSuccess: () =>{
+      onSuccess: (data) =>{
         toast.success('User updated successfully!!!');
-        queryClient.invalidateQueries({queryKey:['user', users.id]});
+
+        queryClient.setQueryData(['user', users.id], data)
+        queryClient.invalidateQueries({queryKey:['user', users.id ]});
         // triggers the old data to be updated
         setTimeout(() => {
           setIsEditing(false);
@@ -44,6 +46,7 @@ const UserForm: React.FC<formProps> = ({users, setIsEditing}) => {
       onError: (error: any) => {
         toast.error(`Update failed: ${error.message || 'Unknown error'}`)
       }
+      
     })
   }
   return (
@@ -84,3 +87,12 @@ const UserForm: React.FC<formProps> = ({users, setIsEditing}) => {
 }
 
 export default UserForm
+
+
+
+// queryClient.setQueryData(['users'], (oldUsers: Use[] | undefined) => {
+//   if (!oldUsers) return [];
+//   return oldUsers.map(user =>
+//     user.id === updatedUser.id ? { ...user, ...updatedUser } : user
+//   );
+// });
