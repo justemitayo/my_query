@@ -41,9 +41,7 @@ const UserDetail:React.FC<mean> = ({userId}) => {
   if (fetchStatus === 'paused') {
     return <p>'The Query wanted to fetch but it was paused'</p>;
   }
-  if (fetchStatus=== 'idle') {
-    return <p>'The Query is not doing anything at the moment'</p>;
-  }
+  
 
 
   return (

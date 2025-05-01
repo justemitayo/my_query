@@ -31,6 +31,15 @@ export const useUpdateUser = () => {
   })
 } 
 
+export const useCreateUser = () => {
+  return useMutation({
+    mutationFn: (newUser: Omit<Use, 'id'>) => {
+      return api.post('/users', newUser).then(res => res.data);
+    }
+  })
+}
+// Omit<Use, 'id'> means the new user doesn’t need an id, because JSON Server will auto-generate one.
+
 
 
 

@@ -5,6 +5,7 @@ import GlobalLoadingIndicator from './GlobalLoadingIndicator';
 import UserDetail from './UserDetail';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import AddUserForm from './AddUserForm';
 
 
 
@@ -20,6 +21,7 @@ function App() {
       <div style={{padding:'20px', width:'70%' }}>
         <UserDetail userId={userId}/>
       </div>
+      <AddUserForm />
       <ToastContainer position="top-right" autoClose={3000} />
     </div>
   );
