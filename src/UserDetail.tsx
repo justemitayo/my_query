@@ -15,9 +15,14 @@ const UserDetail:React.FC<mean> = ({userId}) => {
 
   const [isEditing, setIsEditing] = useState(false)
 
-  const {data: user, isLoading, isError} = useQuery<Use>({queryKey: ['user', userId], queryFn: () => api.getUser(userId), enabled: Boolean(userId) })
+  const {data: user, isLoading, isError, fetchStatus} = useQuery<Use>({
+    queryKey: ['user', userId], 
+    queryFn: () => api.getUser(userId), enabled: Boolean(userId) 
   // we used ['user', userId] as key because we are grabbing specific data
 
+    // The query will not execute until the userId exists
+ 
+  })
   if(!userId) {
     return <p>'select a user'</p>
   }
@@ -30,7 +35,15 @@ const UserDetail:React.FC<mean> = ({userId}) => {
   if (!user) {
     return <p>No user found</p>; 
   }
-  
+  if (fetchStatus === 'fetching') {
+    return <p>'The Query is currentky fetching!!!'</p>;
+  }
+  if (fetchStatus === 'paused') {
+    return <p>'The Query wanted to fetch but it was paused'</p>;
+  }
+  if (fetchStatus=== 'idle') {
+    return <p>'The Query is not doing anything at the moment'</p>;
+  }
 
 
   return (

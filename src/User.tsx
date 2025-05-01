@@ -10,7 +10,7 @@ interface mean {
 
 const User: React.FC<mean> = ({setUserId}) => {
 
-  const {data, isLoading, isError} = useQuery<Use[]>({queryKey: ['user'], queryFn: api.getUsers});
+  const {data, isLoading, isError,fetchStatus} = useQuery<Use[]>({queryKey: ['user'], queryFn: api.getUsers});
 
   // we used 'user' as the key because we are calling the entire data
 
@@ -20,6 +20,13 @@ const User: React.FC<mean> = ({setUserId}) => {
   if (isError) {
     return <p>'Something went wrong!!!'</p>;
   }
+  if (fetchStatus === 'fetching') {
+    return <p>'The Query is currentky fetching!!!'</p>;
+  }
+  if (fetchStatus === 'paused') {
+    return <p>'The Query wanted to fetch but it was paused'</p>;
+  }
+
   return (
     <div>
       <ul>{
