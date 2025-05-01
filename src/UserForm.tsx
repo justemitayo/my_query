@@ -45,6 +45,8 @@ const UserForm: React.FC<formProps> = ({users, setIsEditing}) => {
           )
 
         queryClient.setQueryData(['user', users.id], updatedUsers)
+
+        
         queryClient.invalidateQueries({queryKey:['user', users.id ]});
         // triggers the old data to be updated
         setTimeout(() => {
